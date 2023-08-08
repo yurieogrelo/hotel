@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  db-postgres:
+    image: postgres:alpine
+    ports:
+      - "5436:5432"
+    container_name: "db-postgres"
+    restart: always
+    volumes:
+      - ./banco-de-dado:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+
+volumes:
+  banco-de-dado:

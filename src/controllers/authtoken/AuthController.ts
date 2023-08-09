@@ -27,7 +27,7 @@ export const AuthController = async (req: Request, res: Response,) => {
 		}
 
 
-		const token = sign({id: empresa.id}, "lkadskfalkdsfçlakj", {expiresIn: "30s"});
+		const token = sign({id: empresa.id}, "lkadskfalkdsfçlakj", {expiresIn: "1d"});
 
 		const {id} = empresa;
 

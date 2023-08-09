@@ -29,13 +29,13 @@ import { ListandoEstadoController } from "../controllers/createEstado/ListandoEs
 import { ListandoUmEstadoController } from "../controllers/createEstado/ListandoUmEstadoController";
 import { DeletarEstadoController } from "../controllers/createEstado/DeletandoCIdadeController";
 import { AtualizandoEstadoController } from "../controllers/createEstado/AtualizandoCidadeController";
-import { AuthMiddlewares } from "../controllers/middlewares/auth";
+//import { AuthMiddlewares } from "../controllers/middlewares/auth";
 import { AuthController } from "../controllers/authtoken/AuthController";
 
 const router = Router();
 
 router.post("/empresa", CreateEmpresaController );
-router.get("/empresas", AuthMiddlewares, ListandoEmpresaController );
+router.get("/empresas", ListandoEmpresaController );
 router.get("/empresa", ListandoUmaEmpresaController );
 router.put("/empresa", AtualizandoEmpresaController);
 router.delete("/empresa", DeletarEmpresaController);

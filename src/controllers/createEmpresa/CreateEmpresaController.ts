@@ -3,7 +3,7 @@ import { prisma } from "../../database/client";
 
 //import jwt from "jsonwebtoken";
 import { z, ZodError } from "zod";
-import { hash } from "bcrypt";
+//import { hash } from "bcrypt";
 
 
 const empresaSchema = z.object({
@@ -51,13 +51,13 @@ export const CreateEmpresaController = async  (req: Request, res: Response, ) =>
 		const limparCelular = celular.replace(/[^0-9]/g, "");
 		const limparCep = cep.replace(/[-]/g, "");
 
-		const hash_password = await hash(senha, 8);
+		//const hash_password = await hash(senha, 8);
 
 		const empresa = await prisma.empresa.create({
 			data: {
 				nome,
 				email,
-				senha: hash_password,
+				senha,
 				cnpj: limparCnpj,
 				telefone: limparTelefone,
 				celular: limparCelular,

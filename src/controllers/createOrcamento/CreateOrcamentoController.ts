@@ -50,7 +50,7 @@ export const CreateOrcamentoController = async (req: Request, res: Response,) =>
 			return res.status(400).json(error.issues.map((issue) => ({ message: issue.message })));
 		}
 
-		return res.status(400).json({message: "Error Servidor"});
+		return res.status(400).json({message: "Error Servidor" + error});
 	}
 
 };

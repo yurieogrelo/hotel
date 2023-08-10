@@ -4,9 +4,7 @@ import { prisma } from "../../database/client";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 
-
 export const AuthController = async (req: Request, res: Response,) => {
-
 	try {
 		const { email, senha } = (req.body);
 
@@ -25,8 +23,7 @@ export const AuthController = async (req: Request, res: Response,) => {
 		if (!isValue_password) {
 			return res.status(400).json({ message: "Senha Inválida" });
 		}
-
-
+		/*tem q ter uma variavel de ambiente*/
 		const token = sign({id: empresa.id}, "lkadskfalkdsfçlakj", {expiresIn: "1d"});
 
 		const {id} = empresa;
@@ -34,7 +31,7 @@ export const AuthController = async (req: Request, res: Response,) => {
 		return res.status(200).json({ empresa: {id, email}, token });
 	} catch (error) {
 
-		return res.status(400).json({ message: "Error Servidor" });
+		return res.status(400).json({ message: "Error Servidor", error });
 	}
 
 };

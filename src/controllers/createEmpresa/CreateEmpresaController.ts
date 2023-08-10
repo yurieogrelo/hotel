@@ -7,14 +7,14 @@ import { z, ZodError } from "zod";
 
 
 const empresaSchema = z.object({
-	nome: z.string().min(3).max(50).nonempty("Obrigatório"),
+	nome: z.string().nonempty("Obrigatório"),
 	email: z.string().email({message: "E-mail incorreto"}).nonempty("Obrigatório"),
-	senha: z.string().max(50).nonempty("Obrigatório"),
-	cnpj: z.string().max(18, "14 Digitos").min(13, " 14 Digitos").nonempty("Obrigatório"),
-	telefone: z.string().max(13, "11 Digitos").min(13, " 11 Digitos").nonempty("Obrigatório"),
-	celular: z.string().max(13, "11 Digitos").min(13, " 11 Digitos").nonempty("Obrigatório"),
+	senha: z.string().nonempty("Obrigatório"),
+	cnpj: z.string().nonempty("Obrigatório"),
+	telefone: z.string().nonempty("Obrigatório"),
+	celular: z.string().nonempty("Obrigatório"),
 	endereco: z.string().nonempty("Obrigatório"),
-	cep: z.string().max(9, "8 Digitos").min(9, "8 Digitos").nonempty("Obrigatório"),
+	cep: z.string().nonempty("Obrigatório"),
 	razaosocial: z.string().nonempty("Obrigatório"),
 	cidadeId: z.number()
 });

@@ -27,3 +27,7 @@ export function AuthMiddlewares(req: Request, res: Response, next: NextFunction)
 		return res.status(401).json({ error: "Token Inválido!" });
 	}
 }
+
+export function verifica(token){
+	return readToken(token);
+}

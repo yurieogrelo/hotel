@@ -1,10 +1,7 @@
 import { Request, Response } from "express";
 import { prisma } from "../../database/client";
-
-//import jwt from "jsonwebtoken";
 import { z, ZodError } from "zod";
-//import { hash } from "bcrypt";
-
+import { hash } from "bcrypt";
 
 const empresaSchema = z.object({
 	nome: z.string().nonempty("Obrigatório"),
@@ -33,7 +30,7 @@ export const CreateEmpresaController = async  (req: Request, res: Response, ) =>
 		});
 
 		if (!cidadeExiste) {
-			return res.status(400).json({ message: "Essa Cidade Inexistente!" });
+			return res.status(400).json( "Essa Cidade Inexistente" );
 		}
 
 		const empresaExiste = await prisma.empresa.findUnique({
@@ -51,13 +48,13 @@ export const CreateEmpresaController = async  (req: Request, res: Response, ) =>
 		const limparCelular = celular.replace(/[^0-9]/g, "");
 		const limparCep = cep.replace(/[-]/g, "");
 
-		//const hash_password = await hash(senha, 8);
+		const hash_password = await hash(senha, 8);
 
 		const empresa = await prisma.empresa.create({
 			data: {
 				nome,
 				email,
-				senha,
+				senha: hash_password,
 				cnpj: limparCnpj,
 				telefone: limparTelefone,
 				celular: limparCelular,
@@ -69,12 +66,12 @@ export const CreateEmpresaController = async  (req: Request, res: Response, ) =>
 
 		});
 
-		return res.status(200).json({ message: "Empresa Cadastrada", empresa });
+		return res.status(201).json({ message: "Empresa Cadastrada", empresa });
 	} catch (error) {
 		if(error instanceof ZodError) {
 			return res.status(400).json(error.issues.map((issue) => ({message: issue.message})));
 		}
-		return res.status(400).json({message: "Error Servidor"});
+		return res.status(400).json({message: "Error Servidor" + error});
 	}
 
 };

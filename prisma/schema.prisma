@@ -53,7 +53,7 @@ model Cliente {
 
 model Orcamento {
   id        Int      @id @default(autoincrement())
-  valor     Decimal
+  valor     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   item      Item[]
@@ -68,7 +68,7 @@ model Item {
   descricao  String
   unidade    String
   quantidade String
-  preco      Decimal
+  preco      Float
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

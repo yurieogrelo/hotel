@@ -15,7 +15,7 @@ export const AuthController = async (req: Request, res: Response,) => {
 		});
 
 		if (!empresa) {
-			return res.status(400).json({ message: "Essa Empresa não Existe!" });
+			return res.status(400).json({ message: "Dados Incorreto" });
 		}
 
 		const isValue_password = await compare(senha, empresa.senha);
@@ -26,9 +26,7 @@ export const AuthController = async (req: Request, res: Response,) => {
 		/*tem q ter uma variavel de ambiente*/
 		const token = sign({id: empresa.id}, "lkadskfalkdsfçlakj", {expiresIn: "1d"});
 
-		const {id} = empresa;
-
-		return res.status(200).json({ empresa: {id, email}, token });
+		return res.status(200).json({ empresa, token });
 	} catch (error) {
 
 		return res.status(400).json({ message: "Error Servidor", error });

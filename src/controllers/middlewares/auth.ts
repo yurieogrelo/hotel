@@ -28,6 +28,3 @@ export function AuthMiddlewares(req: Request, res: Response, next: NextFunction)
 	}
 }
 
-export function verifica(token){
-	return readToken(token);
-}

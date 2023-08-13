@@ -30,7 +30,7 @@ export const CreateEmpresaController = async  (req: Request, res: Response, ) =>
 		});
 
 		if (!cidadeExiste) {
-			return res.status(400).json( "Essa Cidade Inexistente" );
+			return res.status(400).json( "Essa Cidade Existe" );
 		}
 
 		const empresaExiste = await prisma.empresa.findUnique({

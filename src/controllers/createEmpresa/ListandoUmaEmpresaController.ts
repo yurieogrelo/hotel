@@ -3,9 +3,7 @@ import { prisma } from "../../database/client";
 
 export const ListandoUmaEmpresaController = async (req: Request, res: Response) => {
 	try {
-
 		const { id } = req.body;
-
 		const empresaExiste = await prisma.empresa.findUnique({
 			where: {
 				id: Number(id)

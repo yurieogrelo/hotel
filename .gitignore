@@ -1,2 +1,3 @@
-node_modules
-banco-de-dado
+/node_modules
+/banco-de-dado
+/.env

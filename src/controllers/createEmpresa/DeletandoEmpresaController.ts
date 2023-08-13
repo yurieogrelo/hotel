@@ -18,7 +18,7 @@ export const DeletarEmpresaController = async (req: Request, res: Response) => {
 
 		return res.status(200).json({ message: "empresa Deletado!", empresa });
 	} catch (error) {
-		return res.status(400).json({message: "Error Servidor"});
+		return res.status(400).json({message: "Error Servidor" + error});
 	}
 
 };

@@ -8,7 +8,7 @@ export const ListandoEmpresaController = async (req: Request, res: Response) => 
 
 		return res.status(200).json({ message: "Todas Empresas Cadastrada", empresa  });
 	} catch (error) {
-		return res.status(400).json({message: "Error Servidor"});
+		return res.status(400).json({message: "Error Servidor" + error});
 	}
 
 };

@@ -29,17 +29,18 @@ import { ListandoEstadoController } from "../controllers/createEstado/ListandoEs
 import { ListandoUmEstadoController } from "../controllers/createEstado/ListandoUmEstadoController";
 import { DeletarEstadoController } from "../controllers/createEstado/DeletandoCIdadeController";
 import { AtualizandoEstadoController } from "../controllers/createEstado/AtualizandoCidadeController";
-
-
+import { AuthAutorizaController } from "../controllers/authController/AuthAutorizaController";
+import { AuthMiddleware } from "../controllers/middlewares/auth";
 
 const router = Router();
 
-router.post("/empresa", CreateEmpresaController );
-router.get("/empresas", ListandoEmpresaController );
-router.get("/empresa", ListandoUmaEmpresaController );
-router.put("/empresa", AtualizandoEmpresaController);
-router.delete("/empresa", DeletarEmpresaController);
+router.post("/empresa",  CreateEmpresaController );
+router.get("/empresas", AuthMiddleware, ListandoEmpresaController );
+router.get("/empresa",  ListandoUmaEmpresaController );
+router.put("/empresa",  AtualizandoEmpresaController);
+router.delete("/empresa",  DeletarEmpresaController);
 
+router.post("/autenticar", AuthAutorizaController  );
 
 router.post("/cliente", CreateClienteController );
 router.get("/clientes", ListandoClienteController );

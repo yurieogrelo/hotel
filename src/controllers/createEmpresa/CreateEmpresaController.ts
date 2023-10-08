@@ -43,9 +43,9 @@ export const CreateEmpresaController = async  (req: Request, res: Response, ) =>
 			return res.status(400).json({message: "Essa Empresa Já Existe!"});
 		}
 
-		const limparCnpj = cnpj.replace(/[^a-zA-Z0-9]/g, "");
-		const limparTelefone = telefone.replace(/[^0-9]/g, "");
-		const limparCelular = celular.replace(/[^0-9]/g, "");
+		const limparCnpj = cnpj.replace(/[.-]/g, "");
+		const limparTelefone = telefone.replace(/[ -]/g, "");
+		const limparCelular = celular.replace(/[ -]/g, "");
 		const limparCep = cep.replace(/[-]/g, "");
 
 		const hash_password = await hash(senha, 8);

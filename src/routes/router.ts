@@ -30,12 +30,12 @@ import { ListandoUmEstadoController } from "../controllers/createEstado/Listando
 import { DeletarEstadoController } from "../controllers/createEstado/DeletandoCIdadeController";
 import { AtualizandoEstadoController } from "../controllers/createEstado/AtualizandoCidadeController";
 import { AuthAutorizaController } from "../controllers/authController/AuthAutorizaController";
-import { AuthMiddleware } from "../controllers/middlewares/auth";
+//import { AuthMiddleware } from "../controllers/middlewares/auth";
 
 const router = Router();
 
 router.post("/empresa",  CreateEmpresaController );
-router.get("/empresas", AuthMiddleware, ListandoEmpresaController );
+router.get("/empresas",  ListandoEmpresaController );
 router.get("/empresa",  ListandoUmaEmpresaController );
 router.put("/empresa",  AtualizandoEmpresaController);
 router.delete("/empresa",  DeletarEmpresaController);

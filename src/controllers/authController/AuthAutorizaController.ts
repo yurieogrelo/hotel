@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const SECRET = process.env.SECRET_JWT;
+const SECRET = process.env.SECRET_JWT as string;
 
 import { Request, Response } from "express";
 import { prisma } from "../../database/client";
@@ -11,17 +11,15 @@ import { sign } from "jsonwebtoken";
 
 const empresaSchema = z.object({
 	id: z.number(),
-	email: z.string().email({message: "E-mail incorreto"}).nonempty("Obrigatório"),
+	email: z.string().email({ message: "E-mail incorreto" }).nonempty("Obrigatório"),
 	senha: z.string().nonempty("Obrigatório"),
 });
+type Empresa = z.infer<typeof empresaSchema>
 
-  type Empresa = z.infer <typeof empresaSchema>
-
-
-export const AuthAutorizaController = async  (req: Request, res: Response ) => {
+export const AuthAutorizaController = async (req: Request, res: Response) => {
 
 	try {
-		const { email, senha}: Empresa = empresaSchema.parse = (req.body);
+		const { email, senha }: Empresa = empresaSchema.parse = (req.body);
 
 		const empresa = await prisma.empresa.findUnique({
 			where: {
@@ -29,24 +27,24 @@ export const AuthAutorizaController = async  (req: Request, res: Response ) => {
 			}
 		});
 
-		if(!empresa) {
-			return res.status(400).json({message: "Essa Empresa Não Existe"});
+		if (!empresa) {
+			return res.status(400).json({ message: "Essa Empresa Não Existe" });
 		}
 
 		const Validar_password = await compare(senha, empresa.senha);
 
-		if(!Validar_password) {
-			return res.json({error: "Senha Inválida"});
+		if (!Validar_password) {
+			return res.json({ error: "Senha Inválida" });
 		}
 
-		const token = sign ({id: empresa.id}, SECRET as string, {expiresIn: "20s"});
+		const token = sign({ id: empresa.id }, SECRET, { expiresIn: "1d" });
 
-		const  { id } = empresa;
+		const { id } = empresa;
 
-		return res.status(201).json({ empresa: {id, email}, token });
+		return res.status(201).json({ empresa: { id, email }, token });
 	} catch (error) {
 
-		return res.status(400).json({message: "Error Servidor" + error});
+		return res.status(400).json({ message: "Error Servidor" + error });
 	}
 
 };

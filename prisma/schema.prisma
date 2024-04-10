@@ -10,84 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Empresa {
-  id          Int      @id @default(autoincrement())
-  nome        String
-  email       String   @unique
-  senha       String
-  cnpj        String
-  telefone    String
-  celular     String
-  endereco    String
-  razaosocial String
-  cep         String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  cliente   Cliente[]
-  orcamento Orcamento[]
-
-  Cidade   Cidade? @relation(fields: [cidadeId], references: [id])
-  cidadeId Int?
-}
-
 model Cliente {
-  id          Int      @id @default(autoincrement())
-  nome        String
-  email       String   @unique
-  cnpjcpf     String
-  telefone    String
-  celular     String
-  endereco    String
-  cep         String
-  razaosocial String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  orcamento Orcamento[]
-  Empresa   Empresa?    @relation(fields: [empresaId], references: [id])
-  empresaId Int?
-  Cidade    Cidade?     @relation(fields: [cidadeId], references: [id])
-  cidadeId  Int?
-}
-
-model Orcamento {
-  id        Int      @id @default(autoincrement())
-  valor     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  item      Item[]
-  Empresa   Empresa? @relation(fields: [empresaId], references: [id])
-  empresaId Int?
-  Cliente   Cliente? @relation(fields: [clienteId], references: [id])
-  clienteId Int?
-}
-
-model Item {
   id         Int      @id @default(autoincrement())
-  descricao  String
-  unidade    String
-  quantidade String
-  preco      Float
+  consumidor String
+  nunerro    String
+  datass     String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-
-  Orcamento   Orcamento? @relation(fields: [orcamentoId], references: [id])
-  orcamentoId Int?
-}
-
-model Cidade {
-  id   Int    @id @default(autoincrement())
-  nome String
-
-  cliente  Cliente[]
-  empresa  Empresa[]
-  Estado   Estado?   @relation(fields: [estadoId], references: [id])
-  estadoId Int?
-}
-
-model Estado {
-  id     Int      @id @default(autoincrement())
-  sigla  String
-  cidade Cidade[]
 }

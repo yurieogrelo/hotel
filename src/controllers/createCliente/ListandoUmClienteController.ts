@@ -12,7 +12,7 @@ export const ListandoUmClienteController = async (req: Request, res: Response) =
 		});
 
 		if(!cliente){
-			return res.status(400).json({massage: "Cliente não encontrado!"});
+			return res.status(400).json({massage: "Nenhuma parcela foi encontrada!"});
 		}
 
 

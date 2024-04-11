@@ -23,7 +23,7 @@ export const CreateClienteController = async (req: Request, res: Response,) => {
 				datass
 			}
 		});
-		return res.status(200).json({ message: "Cliente Cadastrado", cliente });
+		return res.status(200).json({ cliente });
 	} catch (error) {
 		if (error instanceof ZodError) {
 			return res.status(400).json(error.issues.map((issue) => ({ message: issue.message })));

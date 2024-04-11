@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { prisma } from "../../database/client";
 
+
 export const DeletarClienteController = async (req: Request, res: Response) => {
 	try {
-		const { id } = req.body;
+		const { consumidor } = req.body;
 
 		const clienteExiste = await prisma.cliente.findUnique({
 			where: {
@@ -14,7 +15,7 @@ export const DeletarClienteController = async (req: Request, res: Response) => {
 			return res.status(400).json({massage: "Cliente não encontrado!"});
 		}
 
-		const cliente = await prisma.cliente.delete({where: {id: Number(id)}});
+		const cliente = await prisma.cliente.delete({where: {consumidor}});
 
 		return res.status(200).json({ message: "empresa Deletado!", cliente });
 

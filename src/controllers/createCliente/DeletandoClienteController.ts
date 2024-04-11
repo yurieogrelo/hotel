@@ -12,12 +12,12 @@ export const DeletarClienteController = async (req: Request, res: Response) => {
 			}
 		});
 		if(!clienteExiste){
-			return res.status(400).json({massage: "Seu valor foi pago com sucesso!"});
+			return res.status(400).json({massage: "Consumidora não Encontrdo!"});
 		}
 
 		const cliente = await prisma.cliente.delete({where: {consumidor}});
 
-		return res.status(200).json({ message: "empresa Deletado!", cliente });
+		return res.status(200).json({ message: "Seu valor foi pago com sucesso!!", cliente });
 
 	} catch (error) {
 		return res.status(400).json({message: "Error Servidor"});

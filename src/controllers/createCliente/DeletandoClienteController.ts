@@ -7,7 +7,7 @@ export const DeletarClienteController = async (req: Request, res: Response) => {
 
 		const clienteExiste = await prisma.cliente.findUnique({
 			where: {
-				id: Number(id)
+				consumidor: String(consumidor)
 			}
 		});
 		if(!clienteExiste){

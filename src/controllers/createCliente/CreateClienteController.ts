@@ -9,6 +9,8 @@ const clienteSchema = z.object({
 });
 
 
+
+
 type Cliente = z.infer<typeof clienteSchema>
 
 export const CreateClienteController = async (req: Request, res: Response,) => {

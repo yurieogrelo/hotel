@@ -3,7 +3,7 @@ import { prisma } from "../../database/client";
 
 export const ListandoUmClienteController = async (req: Request, res: Response) => {
 	try {
-		const { consumidor } = req.body;
+		const { consumidor } = req.params;
 
 		const cliente = await prisma.cliente.findUnique({
 			where: {

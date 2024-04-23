@@ -17,7 +17,6 @@ export const CreateClienteController = async (req: Request, res: Response,) => {
 	try {
 		const { consumidor, nunerro, datass }: Cliente = clienteSchema.parse(req.body);
 
-
 		const cliente = await prisma.cliente.create({
 			data: {
 				consumidor,

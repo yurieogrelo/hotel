@@ -3,11 +3,11 @@ import { prisma } from "../../database/client";
 
 export const ListandoUmClienteController = async (req: Request, res: Response) => {
 	try {
-		const { consumidor } = req.params;
+		const { id } = req.params;
 
 		const cliente = await prisma.cliente.findUnique({
 			where: {
-				consumidor: String(consumidor)
+				id: Number(id)
 			}
 		});
 

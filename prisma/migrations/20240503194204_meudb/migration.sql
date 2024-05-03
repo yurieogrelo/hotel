@@ -9,6 +9,3 @@ CREATE TABLE "Cliente" (
 
     CONSTRAINT "Cliente_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "Cliente_consumidor_key" ON "Cliente"("consumidor");

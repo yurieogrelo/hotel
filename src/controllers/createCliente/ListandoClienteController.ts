@@ -4,7 +4,7 @@ import { prisma } from "../../database/client";
 
 export const ListandoClienteController = async (req: Request, res: Response) => {
 	try {
-		const cliente = await prisma.cliente.findFirst({orderBy: {consumidor: "desc"}});
+		const cliente = await prisma.cliente.findFirst({orderBy: {id: "desc"}});
 
 		return res.status(200).json({ message: "Todos Cliente Cadastrado", cliente  });
 

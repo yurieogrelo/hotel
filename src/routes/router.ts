@@ -11,7 +11,7 @@ const router = Router();
 
 router.post("/cliente", CreateClienteController );
 router.get("/clientes", ListandoClienteController );
-router.get("/cliente/:consumidor", ListandoUmClienteController );
+router.get("/cliente/:id", ListandoUmClienteController );
 router.delete("/cliente", DeletarClienteController);
 
 

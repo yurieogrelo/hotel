@@ -12,9 +12,9 @@ datasource db {
 
 model Cliente {
   id         Int      @id @default(autoincrement())
-  consumidor String
-  nunerro    String
-  datass     String
+  nome       String
+  cpf        String   @unique
+  quarto     String   @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }

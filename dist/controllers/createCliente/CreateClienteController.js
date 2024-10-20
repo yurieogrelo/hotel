@@ -12,28 +12,53 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateClienteController = void 0;
 const client_1 = require("../../database/client");
 const zod_1 = require("zod");
+// Esquema de validação do cliente
 const clienteSchema = zod_1.z.object({
-    consumidor: zod_1.z.string(),
-    nunerro: zod_1.z.string(),
-    datass: zod_1.z.string(),
+    nome: zod_1.z.string(),
+    cpf: zod_1.z.string(),
+    quarto: zod_1.z.string(),
 });
 const CreateClienteController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { consumidor, nunerro, datass } = clienteSchema.parse(req.body);
+        // Validação do body da requisição
+        const { nome, cpf, quarto } = clienteSchema.parse(req.body);
+        // Verificar se já existe um cliente com o mesmo cpf
+        const existingClienteCpf = yield client_1.prisma.cliente.findUnique({
+            where: { cpf }
+        });
+        if (existingClienteCpf) {
+            return res.status(400).json({ error: 'CPF já existe.' });
+        }
+        // Verificar se já existe um cliente com o mesmo quarto
+        const existingClienteQuarto = yield client_1.prisma.cliente.findUnique({
+            where: { quarto }
+        });
+        if (existingClienteQuarto) {
+            return res.status(400).json({ error: 'Quarto ocupado.' });
+        }
+        // Se não existe, crie o cliente
         const cliente = yield client_1.prisma.cliente.create({
             data: {
-                consumidor,
-                nunerro,
-                datass
+                nome,
+                cpf,
+                quarto
             }
         });
-        return res.status(200).json({ cliente });
+        // Retorna o cliente criado com status 201
+        return res.status(201).json({ cliente });
     }
     catch (error) {
+        // Tratamento de erros do Zod
         if (error instanceof zod_1.ZodError) {
-            return res.status(400).json(error.issues.map((issue) => ({ message: issue.message })));
+            return res.status(400).json({
+                errors: error.issues.map((issue) => ({
+                    path: issue.path.join('.'),
+                    message: issue.message
+                }))
+            });
         }
-        return res.status(400).json({ message: "Error Servidor" + error });
+        // Tratamento de outros erros (Prisma, banco de dados, etc.)
+        return res.status(500).json({ message: "Erro no servidor: " + error });
     }
 });
 exports.CreateClienteController = CreateClienteController;

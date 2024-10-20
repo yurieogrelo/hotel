@@ -13,20 +13,20 @@ exports.DeletarClienteController = void 0;
 const client_1 = require("../../database/client");
 const DeletarClienteController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { consumidor } = req.body;
+        const { cpf } = req.params;
         const clienteExiste = yield client_1.prisma.cliente.findUnique({
             where: {
-                consumidor: String(consumidor)
+                cpf: cpf
             }
         });
         if (!clienteExiste) {
-            return res.status(400).json({ massage: "Consumidora não Encontrdo!" });
+            return res.status(400).json({ massage: "Nome não Encontrdo!" });
         }
-        const cliente = yield client_1.prisma.cliente.delete({ where: { consumidor } });
-        return res.status(200).json({ message: "Seu valor foi pago com sucesso!!", cliente });
+        const cliente = yield client_1.prisma.cliente.delete({ where: { cpf: cpf } });
+        return res.status(200).json({ message: "Deletado com sucesso!!", cliente });
     }
     catch (error) {
-        return res.status(400).json({ message: "Error Servidor" });
+        return res.status(400).json({ message: "Servidor não está rodando" });
     }
 });
 exports.DeletarClienteController = DeletarClienteController;

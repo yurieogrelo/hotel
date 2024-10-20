@@ -13,14 +13,14 @@ exports.ListandoUmClienteController = void 0;
 const client_1 = require("../../database/client");
 const ListandoUmClienteController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { consumidor } = req.params;
+        const { cpf } = req.params;
         const cliente = yield client_1.prisma.cliente.findUnique({
             where: {
-                consumidor: String(consumidor)
+                cpf: cpf
             }
         });
         if (!cliente) {
-            return res.status(400).json({ massage: "Nenhuma parcela foi encontrada!" });
+            return res.status(400).json({ massage: "Nenhuma cliente foi encontrado!" });
         }
         return res.status(200).json({ message: "Cliente", cliente });
     }

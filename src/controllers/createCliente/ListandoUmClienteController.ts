@@ -3,16 +3,16 @@ import { prisma } from "../../database/client";
 
 export const ListandoUmClienteController = async (req: Request, res: Response) => {
 	try {
-		const { id } = req.params;
+		const { cpf } = req.params;
 
 		const cliente = await prisma.cliente.findUnique({
 			where: {
-				id: Number(id)
+				cpf: cpf
 			}
 		});
 
 		if(!cliente){
-			return res.status(400).json({massage: "Nenhuma parcela foi encontrada!"});
+			return res.status(400).json({massage: "Nenhuma cliente foi encontrado!"});
 		}
 
 

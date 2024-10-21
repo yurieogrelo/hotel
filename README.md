@@ -2,3 +2,4 @@
 # apinode
 # apinode
 # apihotelcariri
+# hotel

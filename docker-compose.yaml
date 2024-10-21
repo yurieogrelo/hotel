@@ -12,6 +12,19 @@ services:
     environment:
       POSTGRES_USER: myuser
       POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
 
-volumes:
-  banco-de-dado:
+  app-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: "app-node"
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql://myuser:mypassword@db-postgres:5432/mydatabase?schema=public"
+    depends_on:
+      - db-postgres
+    volumes:
+      - .:/app
